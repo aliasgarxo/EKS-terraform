@@ -1,1 +1,1 @@
-![EKS-terra](https://github.com/aliasgarxo/EKS-terraform/assets/134081765/6480cd4d-9129-447b-aaf6-935e2a18bac4)
+![eks](https://github.com/aliasgarxo/EKS-terraform/assets/134081765/1abf2c60-f8ed-4e8d-9dda-516714dba040)
