@@ -38,7 +38,7 @@ git clone https://github.com/your-username/eks-cluster-terraform.git
 
 **Provision the EKS cluster**:
 
-    Use the following commands to initialize Terraform, plan your infrastructure changes, and apply them:
+Use the following commands to initialize Terraform, plan your infrastructure changes, and apply them:
 
     ```bash
     terraform init
@@ -48,11 +48,11 @@ git clone https://github.com/your-username/eks-cluster-terraform.git
 
 **Verify the deployment**:
 
-    After applying your changes, you can verify the deployment by accessing the EKS cluster console or using `kubectl` to interact with your cluster.
+After applying your changes, you can verify the deployment by accessing the EKS cluster console or using `kubectl` to interact with your cluster.
 
 **Manage your EKS cluster**:
 
-    Now that your EKS cluster is up and running, you can start deploying applications, scaling your worker nodes, and exploring other features of Amazon EKS.
+Now that your EKS cluster is up and running, you can start deploying applications, scaling your worker nodes, and exploring other features of Amazon EKS.
 
 ## Additional Notes
 
