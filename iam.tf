@@ -61,7 +61,8 @@ data "aws_caller_identity" "current" {
 
 locals {
   eks_cluster_identity = data.aws_eks_cluster.main.identity[0]
-  oidc_issuer_hostname = replace(local.eks_cluster_identity.oidc[0].issuer, "https://", "")
+  oidc_issuer_url = local.eks_cluster_identity.oidc[0].issuer
+  oidc_issuer_hostname = replace(local.oidc_issuer_url, "https://", "")
 }
 
 # Role for Amazon EBS CSI Driver
@@ -93,4 +94,74 @@ EOF
   managed_policy_arns = [
     "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
   ]
+}
+
+
+
+
+# For bastion server
+
+# Data source for your EKS cluster
+data "aws_eks_cluster" "your_eks_cluster" {
+  name = aws_eks_cluster.my_eks_cluster.name # Replace with your EKS cluster's name
+}
+
+# Data source for the OIDC provider associated with your EKS cluster
+data "aws_eks_cluster_auth" "cluster" {
+  name = data.aws_eks_cluster.your_eks_cluster.id
+}
+
+# IAM Policy for EKS Read-Only Access 
+resource "aws_iam_policy" "eks_readonly_policy" {
+  name        = "eks-readonly-access"
+  description = "Provides read-only access to EKS resources"
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "eks:DescribeCluster",
+        "eks:ListClusters",
+        "eks:ListNodegroups",
+        "eks:DescribeNodegroup",
+        "eks:AccessKubernetesApi"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+EOF
+}
+
+# IAM Role for your EC2 instance 
+resource "aws_iam_role" "bastion_role" {
+  name = "bastion-role"
+
+  assume_role_policy = jsonencode({
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Principal": {
+          "Service": "ec2.amazonaws.com"
+        },
+        "Action": "sts:AssumeRole"
+      }
+    ]
+  })
+}
+
+# Attach the EKS read-only policy to the role
+resource "aws_iam_role_policy_attachment" "eks_readonly_attachment" {
+  policy_arn = aws_iam_policy.eks_readonly_policy.arn
+  role       = aws_iam_role.bastion_role.name
+}
+
+# Create an IAM instance profile
+resource "aws_iam_instance_profile" "bastion" {
+  name = "bastion-profile" 
+  role = aws_iam_role.bastion_role.name
 }

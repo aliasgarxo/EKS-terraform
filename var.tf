@@ -2,7 +2,9 @@ variable "region" {
   default = "us-east-2"
 }
 
-
+variable "instance-type" {
+  default = "t2.micro"
+}
 
 data "aws_ami" "amazon_linux_2023" {
   most_recent = true
