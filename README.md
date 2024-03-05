@@ -1,6 +1,6 @@
 # Amazon EKS Cluster with Terraform
 
-!EKS Cluster
+<img src="https://github.com/aliasgarxo/EKS-terraform/assets/134081765/1abf2c60-f8ed-4e8d-9dda-516714dba040" width="500">
 
 This project uses Terraform to automate the provisioning of a production-ready Amazon Elastic Kubernetes Service (EKS) cluster. 
 
