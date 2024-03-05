@@ -31,3 +31,32 @@ Clone the repository:
 ```bash
 git clone https://github.com/your-username/eks-cluster-terraform.git
 
+Configure Terraform:
+- Edit the variables.tf file to set the desired configuration for your EKS cluster, including the region, node instance type, and number of nodes.
+- Configure your AWS credentials using environment variables, a shared credentials file, or a configuration file.
+
+**Provision the EKS cluster**:
+
+    Use the following commands to initialize Terraform, plan your infrastructure changes, and apply them:
+
+    ```bash
+    terraform init
+    terraform plan
+    terraform apply
+    ```
+
+**Verify the deployment**:
+
+    After applying your changes, you can verify the deployment by accessing the EKS cluster console or using `kubectl` to interact with your cluster.
+
+**Manage your EKS cluster**:
+
+    Now that your EKS cluster is up and running, you can start deploying applications, scaling your worker nodes, and exploring other features of Amazon EKS.
+
+## Additional Notes
+
+- This project provides a basic example of provisioning an EKS cluster with Terraform. You can customize the configuration to meet your specific requirements.
+- Always test your changes in a controlled environment before deploying them to production.
+- Refer to the Terraform documentation for more information on how to use Terraform.
+- Refer to the Amazon EKS documentation for more information about EKS.
+
