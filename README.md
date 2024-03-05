@@ -30,8 +30,9 @@ Clone the repository:
 
 ```bash
 git clone https://github.com/your-username/eks-cluster-terraform.git
+```
 
-Configure Terraform:
+**Configure Terraform**:
 - Edit the variables.tf file to set the desired configuration for your EKS cluster, including the region, node instance type, and number of nodes.
 - Configure your AWS credentials using environment variables, a shared credentials file, or a configuration file.
 
